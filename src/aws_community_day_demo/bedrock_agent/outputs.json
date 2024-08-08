@@ -1,0 +1,5 @@
+{
+  "LingxianTestBedrockAgent": {
+    "DataSourceBucketName": "agent-datasource"
+  }
+}
