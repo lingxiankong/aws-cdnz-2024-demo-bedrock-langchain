@@ -6,7 +6,7 @@ def create_llm(llm_type: str, model: str, verbose: bool = False, callbacks=None,
     if llm_type == "openai":
         import langchain_openai
 
-        return langchain_openai.ChatOpenAI(model_name=model, verbose=verbose)
+        return langchain_openai.ChatOpenAI(model_name=model, verbose=verbose, temperature=kwargs.get("temperature", 0))
 
     if llm_type == "azure-openai":
         import langchain_openai
@@ -16,7 +16,7 @@ def create_llm(llm_type: str, model: str, verbose: bool = False, callbacks=None,
             openai_api_version=os.environ.get("OPENAI_API_VERSION"),
             callbacks=callbacks,
             verbose=verbose,
-            model_kwargs=kwargs.get("model_kwargs", {}),
+            temperature=kwargs.get("temperature", 0),
         )
 
     if llm_type == "vertexai":
@@ -25,7 +25,6 @@ def create_llm(llm_type: str, model: str, verbose: bool = False, callbacks=None,
         return google_ai.ChatVertexAI(model_name=model, callbacks=callbacks, verbose=verbose)
 
     if llm_type == "aws-redrock":
-        # from langchain_community.chat_models import BedrockChat
         from langchain_aws import ChatBedrock
 
         return ChatBedrock(
