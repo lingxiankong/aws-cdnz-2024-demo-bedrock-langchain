@@ -1,1 +1,0 @@
-# aws-community-day-demo
